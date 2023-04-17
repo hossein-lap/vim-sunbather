@@ -15,6 +15,30 @@ if exists('syntax on')
     syntax reset
 endif
 
+" Toggle bold, italics, underline {{{
+let g:boldface = 0
+let g:italicface = 0
+let g:urlface = 0
+
+if g:boldface == 1
+    let s:thebold = 'bold'
+else
+    let s:thebold = 'none'
+endif
+
+if g:italicface == 1
+    let s:theitalic = 'italic'
+else
+    let s:theitalic = 'none'
+endif
+
+if g:urlface == 1
+    let s:theurl = 'underline'
+else
+    let s:theurl = 'none'
+endif
+" }}}
+
 let g:colors_name='sunbather'
 
 let s:black           = { "gui": "#000000", "cterm": "232" }
@@ -93,7 +117,7 @@ if &background != s:background
 endif
 
 call s:h("Cursor",        {"bg": s:pink, "fg": s:norm })
-call s:h("Comment",       {"fg": s:bg_subtle, "gui": "italic"})
+call s:h("Comment",       {"fg": s:bg_subtle, "gui": s:theitalic, "cterm": s:theitalic})
 
 call s:h("Constant",      {"fg": s:pink})
 hi! link Character        Constant
@@ -113,7 +137,7 @@ hi! link Label            Statement
 hi! link Keyword          Statement
 hi! link Exception        Statement
 
-call s:h("Operator",      {"fg": s:norm, "cterm": "bold", "gui": "bold"})
+call s:h("Operator",      {"fg": s:norm, "cterm": s:thebold, "gui": s:thebold})
 
 call s:h("PreProc",     {"fg": s:norm_subtle})
 hi! link Include          PreProc
@@ -126,24 +150,24 @@ hi! link StorageClass     Type
 hi! link Structure        Type
 hi! link Typedef          Type
 
-call s:h("Special",       {"fg": s:norm_subtle, "gui": "italic"})
+call s:h("Special",       {"fg": s:norm_subtle, "gui": s:theitalic})
 hi! link SpecialChar      Special
 hi! link Tag              Special
 hi! link Delimiter        Special
 hi! link SpecialComment   Special
 hi! link Debug            Special
 
-call s:h("Underlined",    {"fg": s:norm, "gui": "underline", "cterm": "underline"})
+call s:h("Underlined",    {"fg": s:norm, "gui": s:theurl, "cterm": s:theurl})
 call s:h("Ignore",        {"fg": s:bg})
-call s:h("Error",         {"fg": s:actual_white, "bg": s:red, "cterm": "bold"})
-call s:h("Todo",          {"fg": s:pink, "gui": "underline", "cterm": "underline"})
+call s:h("Error",         {"fg": s:actual_white, "bg": s:red, "cterm": s:thebold})
+call s:h("Todo",          {"fg": s:pink, "gui": s:theurl, "cterm": s:theurl})
 call s:h("SpecialKey",    {"fg": s:light_green})
 call s:h("NonText",       {"fg": s:medium_gray})
 call s:h("Directory",     {"fg": s:dark_blue})
 call s:h("ErrorMsg",      {"fg": s:red})
 call s:h("IncSearch",     {"bg": s:yellow, "fg": s:light_black})
 call s:h("Search",        {"bg": s:light_green, "fg": s:light_black})
-call s:h("MoreMsg",       {"fg": s:medium_gray, "cterm": "bold", "gui": "bold"})
+call s:h("MoreMsg",       {"fg": s:medium_gray, "cterm": s:thebold, "gui": s:thebold})
 hi! link ModeMsg MoreMsg
 call s:h("LineNr",        {"fg": s:bg_subtle})
 call s:h("CursorLineNr",  {"fg": s:pink, "bg": s:bg_very_subtle})
@@ -152,7 +176,7 @@ call s:h("StatusLine",    {"bg": s:bg_very_subtle})
 call s:h("StatusLineNC",  {"bg": s:bg_very_subtle, "fg": s:medium_gray})
 call s:h("VertSplit",     {"bg": s:bg_very_subtle, "fg": s:bg_very_subtle})
 call s:h("Title",         {"fg": s:dark_blue})
-call s:h("Visual",        {"fg": s:norm, "bg": s:visual})
+call s:h("Visual",        {"fg": s:black, "bg": s:visual})
 call s:h("VisualNOS",     {"bg": s:bg_subtle})
 call s:h("WarningMsg",    {"fg": s:yellow})
 call s:h("WildMenu",      {"fg": s:bg, "bg": s:norm})
@@ -166,15 +190,15 @@ call s:h("SignColumn",    {"fg": s:light_green})
 
 
 if has("gui_running")
-  call s:h("SpellBad",    {"gui": "underline", "sp": s:red})
-  call s:h("SpellCap",    {"gui": "underline", "sp": s:light_green})
-  call s:h("SpellRare",   {"gui": "underline", "sp": s:light_purple})
-  call s:h("SpellLocal",  {"gui": "underline", "sp": s:dark_green})
+  call s:h("SpellBad",    {"gui": s:theurl, "sp": s:red})
+  call s:h("SpellCap",    {"gui": s:theurl, "sp": s:light_green})
+  call s:h("SpellRare",   {"gui": s:theurl, "sp": s:light_purple})
+  call s:h("SpellLocal",  {"gui": s:theurl, "sp": s:dark_green})
 else
-  call s:h("SpellBad",    {"cterm": "underline", "fg": s:red})
-  call s:h("SpellCap",    {"cterm": "underline", "fg": s:light_green})
-  call s:h("SpellRare",   {"cterm": "underline", "fg": s:light_purple})
-  call s:h("SpellLocal",  {"cterm": "underline", "fg": s:dark_green})
+  call s:h("SpellBad",    {"cterm": s:theurl, "fg": s:red})
+  call s:h("SpellCap",    {"cterm": s:theurl, "fg": s:light_green})
+  call s:h("SpellRare",   {"cterm": s:theurl, "fg": s:light_purple})
+  call s:h("SpellLocal",  {"cterm": s:theurl, "fg": s:dark_green})
 endif
 
 call s:h("Pmenu",         {"fg": s:norm, "bg": s:bg_very_subtle})
@@ -182,11 +206,11 @@ call s:h("PmenuSel",      {"fg": s:subtle_black, "bg": s:pink})
 call s:h("PmenuSbar",     {"fg": s:norm, "bg": s:bg_subtle})
 call s:h("PmenuThumb",    {"fg": s:norm, "bg": s:bg_subtle})
 call s:h("TabLine",       {"fg": s:norm, "bg": s:bg_very_subtle})
-call s:h("TabLineSel",    {"fg": s:subtle_black, "bg": s:pink, "gui": "bold", "cterm": "bold"})
+call s:h("TabLineSel",    {"fg": s:subtle_black, "bg": s:pink, "gui": s:thebold, "cterm": s:thebold})
 call s:h("TabLineFill",   {"fg": s:norm, "bg": s:bg_very_subtle})
 call s:h("CursorColumn",  {"bg": s:bg_very_subtle})
 call s:h("CursorLine",    {"bg": s:bg_very_subtle})
-call s:h("ColorColumn",   {"bg": s:bg_subtle})
+call s:h("ColorColumn",   {"bg": s:light_black})
 
 call s:h("MatchParen",    {"bg": s:bg_subtle, "fg": s:norm})
 call s:h("qfLineNr",      {"fg": s:medium_gray})
@@ -200,14 +224,14 @@ call s:h("htmlH6",        {"bg": s:bg, "fg": s:norm})
 
 " Syntastic
 call s:h("SyntasticWarningSign",    {"fg": s:yellow})
-call s:h("SyntasticWarning",        {"bg": s:yellow, "fg": s:black, "gui": "bold", "cterm": "bold"})
+call s:h("SyntasticWarning",        {"bg": s:yellow, "fg": s:black, "gui": s:thebold, "cterm": s:thebold})
 call s:h("SyntasticErrorSign",      {"fg": s:red})
-call s:h("SyntasticError",          {"bg": s:red, "fg": s:white, "gui": "bold", "cterm": "bold"})
+call s:h("SyntasticError",          {"bg": s:red, "fg": s:white, "gui": s:thebold, "cterm": s:thebold})
 
 " which-key.nvim
-call s:h("WhichKey",                {"bg": s:bg, "fg": s:pink, "gui": "bold", "cterm": "bold"})
-call s:h("WhichKeyDesc",            {"bg": s:bg, "fg": s:norm_subtle, "gui": "bold", "cterm": "bold"})
-call s:h("WhichKeySeparator",       {"bg": s:bg, "fg": s:norm, "gui": "bold", "cterm": "bold"})
+call s:h("WhichKey",                {"bg": s:bg, "fg": s:pink, "gui": s:thebold, "cterm": s:thebold})
+call s:h("WhichKeyDesc",            {"bg": s:bg, "fg": s:norm_subtle, "gui": s:thebold, "cterm": s:thebold})
+call s:h("WhichKeySeparator",       {"bg": s:bg, "fg": s:norm, "gui": s:thebold, "cterm": s:thebold})
 call s:h("WhichKeyFloat",           {"bg": s:bg})
 
 hi link WhichKeyGroup WhichKey
