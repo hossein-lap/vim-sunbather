@@ -6,8 +6,7 @@ A minimal pink colorscheme for Vim.
 
 *Fira Code* font on dark and light backgrounds:
 
-![](screenshots/dark.png)
-![](screenshots/light.png)
+![](screenshots/shot-230418_023943.png)
 
 ## Installation
 
