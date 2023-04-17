@@ -210,7 +210,7 @@ call s:h("TabLineSel",    {"fg": s:subtle_black, "bg": s:pink, "gui": s:thebold,
 call s:h("TabLineFill",   {"fg": s:norm, "bg": s:bg_very_subtle})
 call s:h("CursorColumn",  {"bg": s:bg_very_subtle})
 call s:h("CursorLine",    {"bg": s:bg_very_subtle})
-call s:h("ColorColumn",   {"bg": s:light_black})
+call s:h("ColorColumn",   {"bg": s:subtle_black})
 
 call s:h("MatchParen",    {"bg": s:bg_subtle, "fg": s:norm})
 call s:h("qfLineNr",      {"fg": s:medium_gray})
