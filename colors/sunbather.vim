@@ -128,7 +128,7 @@ hi! link Boolean          Constant
 hi! link Float            Constant
 hi! link String           Constant
 
-"call s:h("Identifier",    {"fg": s:dark_blue})
+"call s:h("Identifier",    {"fg": s:dark_pink})
 hi! link Identifier       PlainNormal
 hi! link Function         Identifier
 
@@ -165,7 +165,7 @@ call s:h("Error",         {"fg": s:actual_white, "bg": s:red, "cterm": s:thebold
 call s:h("Todo",          {"fg": s:pink, "gui": s:theurl, "cterm": s:theurl})
 call s:h("SpecialKey",    {"fg": s:light_green})
 call s:h("NonText",       {"fg": s:medium_gray})
-call s:h("Directory",     {"fg": s:dark_blue})
+call s:h("Directory",     {"fg": s:dark_pink})
 call s:h("ErrorMsg",      {"fg": s:red})
 call s:h("IncSearch",     {"bg": s:yellow, "fg": s:light_black})
 call s:h("Search",        {"bg": s:light_green, "fg": s:light_black})
@@ -177,7 +177,7 @@ call s:h("Question",      {"fg": s:red})
 call s:h("StatusLine",    {"bg": s:bg_very_subtle})
 call s:h("StatusLineNC",  {"bg": s:bg_very_subtle, "fg": s:medium_gray})
 call s:h("VertSplit",     {"bg": s:black, "fg": s:white})
-call s:h("Title",         {"fg": s:dark_blue})
+call s:h("Title",         {"fg": s:dark_pink})
 call s:h("Visual",        {"fg": s:black, "bg": s:visual})
 call s:h("VisualNOS",     {"bg": s:bg_subtle})
 call s:h("WarningMsg",    {"fg": s:yellow})
@@ -187,7 +187,7 @@ call s:h("FoldColumn",    {"fg": s:bg_subtle})
 call s:h("DiffAdd",       {"fg": s:green})
 call s:h("DiffDelete",    {"fg": s:red})
 call s:h("DiffChange",    {"fg": s:dark_yellow})
-call s:h("DiffText",      {"fg": s:dark_blue})
+call s:h("DiffText",      {"fg": s:dark_pink})
 call s:h("SignColumn",    {"fg": s:light_green})
 
 
