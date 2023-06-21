@@ -12,30 +12,20 @@
 hi clear
 
 if exists('syntax on')
-    syntax reset
+	syntax reset
 endif
 
 " Toggle bold, italics, underline {{{
-let g:boldface = 0
-let g:italicface = 0
-let g:urlface = 0
+let g:fontfaces = 0
 
-if g:boldface == 1
-    let s:thebold = 'bold'
+if g:fontfaces == 1
+	let s:thebold = 'bold'
+	let s:theitalic = 'italic'
+	let s:theurl = 'underline'
 else
-    let s:thebold = 'none'
-endif
-
-if g:italicface == 1
-    let s:theitalic = 'italic'
-else
-    let s:theitalic = 'none'
-endif
-
-if g:urlface == 1
-    let s:theurl = 'underline'
-else
-    let s:theurl = 'none'
+	let s:thebold = 'none'
+	let s:theitalic = 'none'
+	let s:theurl = 'none'
 endif
 " }}}
 
@@ -73,41 +63,51 @@ let s:dark_yellow     = { "gui": "#A89C14", "cterm": "3"    }
 let s:background = &background
 
 if &background == "dark"
-  let s:bg              = s:black
-  let s:bg_subtle       = s:lighter_black
-  let s:bg_very_subtle  = s:subtle_black
-  let s:norm            = s:lighter_gray
-  let s:norm_subtle     = s:medium_gray
-  let s:pink            = s:light_pink
-  let s:cyan            = s:light_cyan
-  let s:green           = s:light_green
-  let s:red             = s:light_red
-  let s:visual          = s:light_pink
-  let s:yellow          = s:light_yellow
+	let s:bg              = s:black
+	let s:bg_subtle       = s:lighter_black
+	let s:bg_very_subtle  = s:subtle_black
+	let s:norm            = s:lighter_gray
+	let s:norm_subtle     = s:medium_gray
+	let s:pink            = s:light_pink
+	let s:cyan            = s:light_cyan
+	let s:green           = s:light_green
+	let s:red             = s:light_red
+	let s:visual          = s:light_pink
+	let s:yellow          = s:light_yellow
 else
-  let s:bg              = s:actual_white
-  let s:bg_subtle       = s:light_gray
-  let s:bg_very_subtle  = s:lightest_gray
-  let s:norm            = s:light_black
-  let s:norm_subtle     = s:medium_gray
-  let s:pink            = s:dark_pink
-  let s:cyan            = s:dark_cyan
-  let s:green           = s:dark_green
-  let s:red             = s:dark_red
-  let s:visual          = s:dark_pink
-  let s:yellow          = s:dark_yellow
+	let s:bg              = s:actual_white
+	let s:bg_subtle       = s:light_gray
+	let s:bg_very_subtle  = s:lightest_gray
+	let s:norm            = s:light_black
+	let s:norm_subtle     = s:medium_gray
+	let s:pink            = s:dark_pink
+	let s:cyan            = s:dark_cyan
+	let s:green           = s:dark_green
+	let s:red             = s:dark_red
+	let s:visual          = s:dark_pink
+	let s:yellow          = s:dark_yellow
 endif
+
+let s:active = s:pink
+if &background == "dark"
+	let s:dark_active = s:dark_pink
+	let s:light_active = s:light_pink
+else
+	let s:dark_active = s:light_pink
+	let s:light_active = s:dark_pink
+endif
+let s:visual = s:dark_active
 
 " https://github.com/noahfrederick/vim-hemisu/
 function! s:h(group, style)
-  execute "highlight" a:group
-    \ "guifg="   (has_key(a:style, "fg")    ? a:style.fg.gui   : "NONE")
-    \ "guibg="   (has_key(a:style, "bg")    ? a:style.bg.gui   : "NONE")
-    \ "guisp="   (has_key(a:style, "sp")    ? a:style.sp.gui   : "NONE")
-    \ "gui="     (has_key(a:style, "gui")   ? a:style.gui      : "NONE")
-    \ "ctermfg=" (has_key(a:style, "fg")    ? a:style.fg.cterm : "NONE")
-    \ "ctermbg=" (has_key(a:style, "bg")    ? a:style.bg.cterm : "NONE")
-    \ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
+	execute "highlight" a:group
+		\ "guifg="   (has_key(a:style, "fg")    ? a:style.fg.gui   : "NONE")
+		\ "guibg="   (has_key(a:style, "bg")    ? a:style.bg.gui   : "NONE")
+		\ "guisp="   (has_key(a:style, "sp")    ? a:style.sp.gui   : "NONE")
+		\ "gui="     (has_key(a:style, "gui")   ? a:style.gui      : "NONE")
+		\ "ctermfg=" (has_key(a:style, "fg")    ? a:style.fg.cterm : "NONE")
+		\ "ctermbg=" (has_key(a:style, "bg")    ? a:style.bg.cterm : "NONE")
+		\ "cterm="   (has_key(a:style, "cterm") ? a:style.cterm    : "NONE")
 endfunction
 
 call s:h("Normal",        {"bg": s:bg, "fg": s:norm})
@@ -115,7 +115,7 @@ call s:h("PlainNormal",   {"bg": s:actual_black, "fg": s:norm})
 
 " restore &background's value in case changing Normal changed &background (:help :hi-normal-cterm)
 if &background != s:background
-   execute "set background=" . s:background
+	execute "set background=" . s:background
 endif
 
 call s:h("Cursor",        {"bg": s:pink, "fg": s:norm })
@@ -167,8 +167,8 @@ call s:h("SpecialKey",    {"fg": s:light_green})
 call s:h("NonText",       {"fg": s:medium_gray})
 call s:h("Directory",     {"fg": s:dark_pink})
 call s:h("ErrorMsg",      {"fg": s:red})
-call s:h("IncSearch",     {"bg": s:yellow, "fg": s:light_black})
-call s:h("Search",        {"bg": s:light_green, "fg": s:light_black})
+call s:h("IncSearch",     {"bg": s:light_active, "fg": s:light_black})
+call s:h("Search",        {"bg": s:dark_active, "fg": s:light_black})
 call s:h("MoreMsg",       {"fg": s:medium_gray, "cterm": s:thebold, "gui": s:thebold})
 hi! link ModeMsg MoreMsg
 call s:h("LineNr",        {"fg": s:bg_subtle})
@@ -192,15 +192,15 @@ call s:h("SignColumn",    {"fg": s:light_green})
 
 
 if has("gui_running")
-  call s:h("SpellBad",    {"gui": s:theurl, "sp": s:red})
-  call s:h("SpellCap",    {"gui": s:theurl, "sp": s:light_green})
-  call s:h("SpellRare",   {"gui": s:theurl, "sp": s:light_purple})
-  call s:h("SpellLocal",  {"gui": s:theurl, "sp": s:dark_green})
+	call s:h("SpellBad",    {"gui": s:theurl, "sp": s:red})
+	call s:h("SpellCap",    {"gui": s:theurl, "sp": s:light_green})
+	call s:h("SpellRare",   {"gui": s:theurl, "sp": s:light_purple})
+	call s:h("SpellLocal",  {"gui": s:theurl, "sp": s:dark_green})
 else
-  call s:h("SpellBad",    {"cterm": s:theurl, "fg": s:red})
-  call s:h("SpellCap",    {"cterm": s:theurl, "fg": s:light_green})
-  call s:h("SpellRare",   {"cterm": s:theurl, "fg": s:light_purple})
-  call s:h("SpellLocal",  {"cterm": s:theurl, "fg": s:dark_green})
+	call s:h("SpellBad",    {"cterm": s:theurl, "fg": s:red})
+	call s:h("SpellCap",    {"cterm": s:theurl, "fg": s:light_green})
+	call s:h("SpellRare",   {"cterm": s:theurl, "fg": s:light_purple})
+	call s:h("SpellLocal",  {"cterm": s:theurl, "fg": s:dark_green})
 endif
 
 call s:h("Pmenu",         {"fg": s:norm, "bg": s:black})
